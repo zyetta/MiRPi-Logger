@@ -1,4 +1,4 @@
-function FIG = singlePlot(A, LGD, YLAB, TTL , TYP, YLIM, TCK);
+function FIG = singlePlot(A, YLAB, TTL , TYP, YLIM, TCK);
     FIG = nexttile;
     hold on
     if(A(1, 2) > -1)
