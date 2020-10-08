@@ -18,18 +18,15 @@ time_out = 45
 username = "mqtt"
 password = "gJGResE%0puwsX8%V$tp*01z2RJz0u88OFdjkDyO7*V0Yjo"
 
-Addresses = [
-    "10.42.0.2",
-    "10.42.0.3",
-    "10.42.0.4",
-    "10.42.0.5",
-    "10.42.0.6",
-    "10.42.0.7",
-    "10.42.0.8",
-    "10.42.0.9"
-            ]
+#Get IP's
+Addresses = []
+with open("./Profile.csv", mode='r') as csv_file:
+    csv_reader = csv.DictReader(csv_file)
+    for row in csv_reader:
+        Addresses.append(row["IP"])
 
-#CSV Data
+
+#Fields
 Fields = ['Time', 'Device', 'Data']
 
 def ping_state():
@@ -127,16 +124,6 @@ client_name.username_pw_set(username = username, password=password)
 try:
     client_name.connect(broker_address, broker_port, time_out)
     client_name.loop_start()
-
-
-
-
-
-
-
-
-
-
 finally:
     i = 0
     while(1):
