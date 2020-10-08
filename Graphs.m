@@ -20,29 +20,24 @@ Hub = readtable('./' + FolderName + '/Hub.csv','HeaderLines',0,'ReadVariableName
 %Convert to Array
 %--Devices
 
-[D1, D2, D3, D4, D5, D6, D7, D8, DNAME] = DeviceSeparate(Devices, P_IP);
-[S1, S2, S3, S4, S5, S6, S7, S8, SNAME] = DeviceSeparate(State, P_IP);
-[H1, H2, H3, H4, H5, H6, H7, H8, HNAME] = DeviceSeparate(Hub, P_PIN);
+[D1, D2, D3, D4, D5, D6, D7, D8] = DeviceSeparate(Devices, P_IP);
+[S1, S2, S3, S4, S5, S6, S7, S8] = DeviceSeparate(State, P_IP);
+[H1, H2, H3, H4, H5, H6, H7, H8] = DeviceSeparate(Hub, P_PIN);
 
 %--Sensors
-X_Sensors = table2array(Sensors(:, 1));
-X_Sensors = unix_conv(X_Sensors);
-
-Y_Sensors = table2array(Sensors(:, 3));
+X_Sens = unix2dt(table2array(Sensors(:, 1)));
+Y_Sens = table2array(Sensors(:, 3));
 Name_Sensors = unique(table2array(Sensors(:, 2)));
 lim_Sensors = [0, 15];
 
+tiledlayout(4,1,'TileSpacing','Compact');
+GR = zeros(4, 1)
+
+GR(1) = Multiplot(D1, D2, D3, D4, D5, D6, D7, D8, P_PIN, "RPi CPU Usage [%]", "RPi CPU Usage", 1, [0, 110], 1);
+GR(2) = Multiplot(S1, S2, S3, S4, S5, S6, S7, S8, P_PIN, "Accessibility State", "RPi Network Accessibility", 1, [0, 1.1], 1);
+GR(3) = Multiplot(H1, H2, H3, H4, H5, H6, H7, H8, P_PIN, "Power Control State", "RPi Power State Control", 1, [0, 1.1], 0); 
 
 
-%Plot Graphs
-t = tiledlayout(4,1);
-tiles = zeros(4,1);
 
 
-
-
-
-plotFigures(X_Sensors, Y_Sensors, Name_Sensors, "Current Draw [A]", "Hub Current Draw [A]", 1, 2, lim_Sensors, 0);
-
-xlabel(t,'Time')
-t.TileSpacing = 'compact';
+linkaxes(GR,'x')

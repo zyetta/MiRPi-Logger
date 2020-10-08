@@ -1,13 +1,12 @@
 function [A1, A2, A3, A4, A5, A6, A7, A8, NAME] = DeviceSeparate(tbl, K)
     X = table2array(tbl(:, 1));
-    NAME = unique(table2array(tbl(:, 2)));
     Y = table2array(tbl(:, 3));
 
 
     i = 1;
     try
         Y1 = Y(tbl.Device == Conv(K(i), tbl.Device), :);
-        X1 = X(tbl.Device == Conv(K(i), tbl.Device), :);        
+        X1 = X(tbl.Device == Conv(K(i), tbl.Device), :);  
     catch
         Y1 = -1;
         X1 = -1;
@@ -15,7 +14,7 @@ function [A1, A2, A3, A4, A5, A6, A7, A8, NAME] = DeviceSeparate(tbl, K)
     i = i + 1;
     try
         Y2 = Y(tbl.Device == Conv(K(i), tbl.Device), :);     
-        X2 = X(tbl.Device == Conv(K(i), tbl.Device), :);     
+        X2 = X(tbl.Device == Conv(K(i), tbl.Device), :);  
     catch
         Y2 = -1;
         X2 = -1;
@@ -23,7 +22,7 @@ function [A1, A2, A3, A4, A5, A6, A7, A8, NAME] = DeviceSeparate(tbl, K)
     i = i + 1;
     try
         Y3 = Y(tbl.Device == Conv(K(i), tbl.Device), :);     
-        X3 = X(tbl.Device == Conv(K(i), tbl.Device), :);     
+        X3 = X(tbl.Device == Conv(K(i), tbl.Device), :);    
     catch
         Y3 = -1;
         X3 = -1;
@@ -39,7 +38,8 @@ function [A1, A2, A3, A4, A5, A6, A7, A8, NAME] = DeviceSeparate(tbl, K)
     i = i + 1;
     try
         Y5 = Y(tbl.Device == Conv(K(i), tbl.Device), :);     
-        X5 = X(tbl.Device == Conv(K(i), tbl.Device), :);     
+        X5 = X(tbl.Device == Conv(K(i), tbl.Device), :);
+        X5 = unix2dt(X5);     
     catch
         Y5 = -1;
         X5 = -1;
@@ -48,6 +48,7 @@ function [A1, A2, A3, A4, A5, A6, A7, A8, NAME] = DeviceSeparate(tbl, K)
     try
         Y6 = Y(tbl.Device == Conv(K(i), tbl.Device), :);     
         X6 = X(tbl.Device == Conv(K(i), tbl.Device), :);     
+        X6 = unix2dt(X6);
     catch
         Y6 = -1;
         X6 = -1;
@@ -68,6 +69,7 @@ function [A1, A2, A3, A4, A5, A6, A7, A8, NAME] = DeviceSeparate(tbl, K)
         Y8 = -1;
         X8 = -1;
     end
+ 
     A1 = [X1, Y1];
     A2 = [X2, Y2];
     A3 = [X3, Y3];

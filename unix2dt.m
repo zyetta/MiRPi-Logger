@@ -3,7 +3,13 @@
 %Input: Unix Timestamp
 %Output: Equivalent Datetime
 %-------------------------------------------------------------------------
-function A = unix_conv(X)
-    A = datetime( X, 'ConvertFrom', 'posixtime','TimeZone','Africa/Johannesburg');
+function A = unix2dt(X)
+    if(X)
+        try
+            A = datetime( X, 'ConvertFrom', 'posixtime','TimeZone','Africa/Johannesburg');
+        catch
+            A = -1
+        end
+    end
 end
 
