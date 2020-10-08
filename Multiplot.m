@@ -4,13 +4,11 @@ function FIG = Multiplot(A1, A2, A3, A4, A5, A6, A7, A8, LGD, YLAB, TTL , TYP, Y
     FLAG = 0;   
     i = 1;
     try
-        LGD(i)
         GenPlot(A1, TYP, LGD(i), FIG);
     catch
     end
     i = i + 1;
     try
-        LGD(i)
         GenPlot(A2, TYP, LGD(i), FIG);
     catch
     end
@@ -51,9 +49,8 @@ function FIG = Multiplot(A1, A2, A3, A4, A5, A6, A7, A8, LGD, YLAB, TTL , TYP, Y
     ylim(YLIM)
     legend('show')
     grid on
-    set(gca,'xtick',[])
     if(TCK == 1)
-        set(gca,'xticklabel',[])
+        set(gca,'xticklabel',[]);
     end
     hold off
     function GenPlot(A, B, C, D)
@@ -69,6 +66,5 @@ function FIG = Multiplot(A1, A2, A3, A4, A5, A6, A7, A8, LGD, YLAB, TTL , TYP, Y
                 x = plot(X, Y, 'DisplayName', "RPi " + string(C));
             end
         end
-        
     end
 end
